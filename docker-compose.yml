@@ -1,0 +1,19 @@
+version: "3.9"
+
+networks:
+  tembo-net:
+    driver: bridge
+    name: tembo-net
+
+services:
+  tembo-be:
+    build: .
+    hostname: tembo-be
+    ports:
+      - "8080:8080"
+      - "9229:9229"
+    networks:
+      -  tembo-net
+    volumes:
+      - ./:/app
+    command: "yarn dev"
