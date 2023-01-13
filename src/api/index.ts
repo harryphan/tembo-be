@@ -1,5 +1,5 @@
 import express from 'express';
-import states from './states';
+import users from './users';
 
 const router = express.Router();
 
@@ -9,6 +9,6 @@ router.get('/', (req, res) => {
   });
 });
 
-router.use('/states', states);
+router.use('/users', users);
 
 export default router;
