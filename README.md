@@ -1,9 +1,13 @@
 # tembo-be
 
+Proof of concept for one time secret. Any user can send a message to another existing user. Messages
+will be encrypted and stored until retrieval. Once retrieved, secret is destroyed.
 
 `docker compose up --build`
 
-starts up docker containers with node server on port 8080, postgres on 5432
+builds docker image for back end and starts up docker 
+containers with node server on port 8080, postgres on 5432. can be called without --build once
+the image is built.
 
 `yarn db:migration up`
 
