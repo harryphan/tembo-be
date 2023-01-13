@@ -42,11 +42,6 @@ export const up: Migration = async ({ context: sequelize }) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        fromUserId:{
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: { model: 'user', key: 'id' }
-        },
         toUserId:{
             type: DataTypes.INTEGER,
             allowNull: false,
