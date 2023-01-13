@@ -9,7 +9,7 @@
     "build": "tsc",
     "lint": "eslint --fix src test",
     "test": "jest",
-    "db:migration" : "DBHOST=localhost node db/migrate"
+    "db:migration": "DBHOST=localhost node db/migrate"
   },
   "keywords": [],
   "repository": "git@github.com:harryphan/tembo-be.git",
@@ -32,7 +32,9 @@
     "umzug": "^3.2.1"
   },
   "dependencies": {
+    "@types/crypto-js": "^4.1.1",
     "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
     "dotenv": "^16.0.3",
     "express": "^4.18.1",
     "pg": "^8.8.0",
