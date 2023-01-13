@@ -8,7 +8,8 @@
     "dev": "nodemon src/index.ts",
     "build": "tsc",
     "lint": "eslint --fix src test",
-    "test": "jest"
+    "test": "jest",
+    "db:migration" : "DBHOST=localhost node db/migrate"
   },
   "keywords": [],
   "repository": "git@github.com:harryphan/tembo-be.git",
