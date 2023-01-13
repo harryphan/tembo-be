@@ -36,7 +36,7 @@ router.post('/', async (req, res) =>{
   const {toUserId,message} = req.body;
   // result of quick google search to encrypt secret
   const ciphertext = AES.encrypt(message, toUserId.toString()).toString();
-  // should be in a message service
+  // should be in a message service. api shouldnt care about how we persist this data.
   await Message.create({ message:ciphertext, toUserId: parseInt(toUserId) });
   res.sendStatus(200);
 })
