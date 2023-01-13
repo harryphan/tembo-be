@@ -5,7 +5,6 @@ import {User} from './index';
 interface MessageAttributes {
     id: number;
     message: string;
-    fromUserId: number;
     toUserId: number;
     createdAt?: Date;
     updatedAt?: Date;
@@ -19,7 +18,6 @@ export interface MessageOutput extends Required<MessageAttributes> {}
 class Message extends Model<MessageAttributes, MessageInput> implements MessageAttributes {
     public id!: number
     public message!: string
-    public fromUserId!: number
     public toUserId!: number
 
     // timestamps!
@@ -38,13 +36,6 @@ Message.init({
         type: DataTypes.STRING,
         allowNull: false
     },
-    fromUserId: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: User,
-            key: 'id'
-        }
-    },
     toUserId: {
         type: DataTypes.INTEGER,
         references: {
@@ -57,7 +48,6 @@ Message.init({
     tableName: 'message'
 })
 
-Message.belongsTo(User, {foreignKey: 'fromUserId', as:'FromUserId'});
 Message.belongsTo(User, {foreignKey: 'toUserId', as:'ToUserId'});
 
 export default Message;
