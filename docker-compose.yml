@@ -17,3 +17,20 @@ services:
     volumes:
       - ./:/app
     command: "yarn dev"
+  postgres:
+    container_name: postgres
+    image: postgres:15.1-alpine
+    restart: always
+    networks:
+      - tembo-net
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: tembo
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
