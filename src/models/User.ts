@@ -35,7 +35,7 @@ User.init({
     }
 }, {
     sequelize: sequelizeConnection,
-    modelName: 'Users'
+    tableName: 'user'
 })
 
 export default User;

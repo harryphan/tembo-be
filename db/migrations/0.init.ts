@@ -8,7 +8,7 @@ const seedUsers = [
 ];
 
 export const up: Migration = async ({ context: sequelize }) => {
-    await sequelize.getQueryInterface().createTable('Users', {
+    await sequelize.getQueryInterface().createTable('user', {
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -32,9 +32,44 @@ export const up: Migration = async ({ context: sequelize }) => {
         }
     });
 
-    await sequelize.getQueryInterface().bulkInsert('Users', seedUsers);
+    await sequelize.getQueryInterface().createTable('message', {
+        id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+        },
+        message: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        fromUserId:{
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: { model: 'user', key: 'id' }
+        },
+        toUserId:{
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: { model: 'user', key: 'id' }
+        },
+        createdAt:{
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        updatedAt:{
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        deletedAt:{
+            type: DataTypes.DATE,
+            allowNull: true
+        }
+    });
+
+    await sequelize.getQueryInterface().bulkInsert('user', seedUsers);
 };
 
 export const down: Migration = async ({ context: sequelize }) => {
-    await sequelize.getQueryInterface().dropTable('Users');
+    await sequelize.getQueryInterface().dropTable('message');
+    await sequelize.getQueryInterface().dropTable('user');
 };
