@@ -16,3 +16,8 @@ destroys db tables
 service can be reached at http://localhost:8080/v1/users
 
 
+example post message: 
+
+```
+curl -X POST localhost:8080/v1/messages -H 'Content-Type: application/json' -d '{"toUserId":1,"message":"secret"}'
+```
