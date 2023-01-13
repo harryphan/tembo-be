@@ -11,8 +11,8 @@ export const up: Migration = async ({ context: sequelize }) => {
     await sequelize.getQueryInterface().createTable('user', {
         id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
             primaryKey: true,
+            autoIncrement: true
         },
         username: {
             type: DataTypes.STRING,
@@ -35,8 +35,8 @@ export const up: Migration = async ({ context: sequelize }) => {
     await sequelize.getQueryInterface().createTable('message', {
         id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
             primaryKey: true,
+            autoIncrement: true,
         },
         message: {
             type: DataTypes.STRING,
