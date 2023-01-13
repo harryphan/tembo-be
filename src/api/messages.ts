@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
 router.get('/user/:userId', async (req, res) => {
   const userId = parseInt(req.params.userId) || -1;
 
-  //this should be separated to a message service
+  //this should be in a message service
   const messages = await Message.findAll({where: {toUserId: userId}, raw:true});
   await Message.destroy({where: {toUserId: userId}});
   const decrypted = messages.map(message => {
@@ -36,6 +36,7 @@ router.post('/', async (req, res) =>{
   const {toUserId,message} = req.body;
   // result of quick google search to encrypt secret
   const ciphertext = AES.encrypt(message, toUserId.toString()).toString();
+  // should be in a message service
   await Message.create({ message:ciphertext, toUserId: parseInt(toUserId) });
   res.sendStatus(200);
 })
