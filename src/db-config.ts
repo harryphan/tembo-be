@@ -1,5 +1,7 @@
 import { Sequelize } from 'sequelize';
 
+
+// move to env file.
 const dbName = 'tembo' as string;
 const dbUser = 'postgres' as string;
 const dbHost = process.env.DBHOST || 'postgres';
