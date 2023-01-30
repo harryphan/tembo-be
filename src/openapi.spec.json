@@ -1,0 +1,129 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Title",
+    "description": "Title",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://loccalhost:8080/v1"
+    }
+  ],
+  "paths": {
+    "/messages":{
+      "post": {
+        "summary": "post message to user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Message"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "response to adding message",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/messages/user/{userId}": {
+      "get": {
+        "summary": "Returns a list of messages.",
+        "description": "som desc.",
+        "parameters": [{
+          "name": "userId",
+          "in": "path",
+          "required": true,
+          "description": "The ID of the user to return.",
+          "schema": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          }
+        }],
+
+        "responses": {
+          "200": {
+            "description": "A JSON array of messages",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Messages"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Messages": {
+        "type": "object",
+        "properties": {
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          }
+        },
+        "required": ["messages"]
+      },
+      "Message":{
+        "type": "object",
+        "properties":{
+          "toUserId": {
+            "type": "integer",
+            "format": "int64",
+            "example": 4
+          },
+          "message": {
+            "type": "string",
+            "example": "some message"
+          }
+        },
+        "required": ["toUserId","message"]
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string"
+              },
+              "stack": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
