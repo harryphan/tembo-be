@@ -21,8 +21,9 @@ describe('app.js', () => {
         const res = await request(app).get('/v1/messages/user/asdjgoiasd');
 
         expect(res.status).toEqual(500);
+        expect(res.body.message).toEqual('request/params/userId must be integer');
 
-        expect(res).not.toSatisfyApiSpec();
+        expect(res).toSatisfyApiSpec();
     });
     it('should make a post request and satisfy OpenAPI spec', async () => {
 
@@ -44,7 +45,7 @@ describe('app.js', () => {
         const res = await request(app).post('/v1/messages').send(payload);
 
         expect(res.status).toEqual(500);
-
+        expect(res.body.message).toEqual('request/body/toUserId must be integer');
 
         expect(res).toSatisfyApiSpec();
 
